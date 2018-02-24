@@ -253,15 +253,17 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
             if(s.equals("Success")){
                 qrImageView.setImageBitmap(bitmap);
+                qrImageView.setVisibility(View.VISIBLE);
                 saveButton.setVisibility(View.VISIBLE);
                 shareButton.setVisibility(View.VISIBLE);
                 processButton.setText("Process");
             }else {
-                Toast.makeText(MainActivity.this, "Something went wrong: "+s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Something went wrong: "+s, Toast.LENGTH_LONG).show();
+                qrImageView.setVisibility(View.INVISIBLE);
+                saveButton.setVisibility(View.INVISIBLE);
+                shareButton.setVisibility(View.INVISIBLE);
             }
-            qrImageView.setVisibility(View.VISIBLE);
-            saveButton.setVisibility(View.INVISIBLE);
-            shareButton.setVisibility(View.INVISIBLE);
+
             processButton.setClickable(true);
         }
 

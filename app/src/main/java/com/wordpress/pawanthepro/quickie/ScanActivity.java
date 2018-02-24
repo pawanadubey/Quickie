@@ -38,7 +38,6 @@ public class ScanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#03A9F4")));
         getSupportActionBar().setTitle("Scan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -92,7 +91,11 @@ public class ScanActivity extends AppCompatActivity {
                         break;
                     case "Web":
                         Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(outputData.getText().toString()));
+                        String url=outputData.getText().toString();
+                        if(!(url.startsWith("http://") || url.startsWith("https://"))){
+                            url="http://"+url;
+                        }
+                        i.setData(Uri.parse(url));
                         startActivity(i);
                         break;
                     case "IP":
@@ -101,7 +104,7 @@ public class ScanActivity extends AppCompatActivity {
                         startActivity(i1);
                         break;
                     default:
-                        ;
+
                 }
             }
         });
@@ -119,18 +122,22 @@ public class ScanActivity extends AppCompatActivity {
                 if(Patterns.PHONE.matcher(scanResult).matches()){
                     useButton.setImageResource(R.drawable.ic_phone);
                     scanType="Phone";
+                    useButton.setVisibility(View.VISIBLE);
                 }else if(Patterns.EMAIL_ADDRESS.matcher(scanResult).matches()){
                     useButton.setImageResource(R.drawable.ic_email);
                     scanType="Email";
+                    useButton.setVisibility(View.VISIBLE);
                 }else if(Patterns.WEB_URL.matcher(scanResult).matches()){
                     useButton.setImageResource(R.drawable.ic_web);
                     scanType="Web";
+                    useButton.setVisibility(View.VISIBLE);
                 }else if(Patterns.IP_ADDRESS.matcher(scanResult).matches()){
                     useButton.setImageResource(R.drawable.ic_web);
                     scanType="IP";
+                    useButton.setVisibility(View.VISIBLE);
+                }else{
+                    useButton.setVisibility(View.INVISIBLE);
                 }
-
-                useButton.setVisibility(View.VISIBLE);
                 copyButton.setVisibility(View.VISIBLE);
             }
         } else {
