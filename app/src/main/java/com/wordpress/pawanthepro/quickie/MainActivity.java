@@ -255,13 +255,15 @@ public class MainActivity extends AppCompatActivity {
                 qrImageView.setImageBitmap(bitmap);
                 saveButton.setVisibility(View.VISIBLE);
                 shareButton.setVisibility(View.VISIBLE);
+                qrImageView.setVisibility(View.VISIBLE);
                 processButton.setText("Process");
             }else {
                 Toast.makeText(MainActivity.this, "Something went wrong: "+s, Toast.LENGTH_SHORT).show();
+                saveButton.setVisibility(View.INVISIBLE);
+                shareButton.setVisibility(View.INVISIBLE);
+                qrImageView.setVisibility(View.INVISIBLE);
             }
-            qrImageView.setVisibility(View.VISIBLE);
-            saveButton.setVisibility(View.INVISIBLE);
-            shareButton.setVisibility(View.INVISIBLE);
+
             processButton.setClickable(true);
         }
 

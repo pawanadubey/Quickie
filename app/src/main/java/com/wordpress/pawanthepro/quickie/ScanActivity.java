@@ -104,7 +104,6 @@ public class ScanActivity extends AppCompatActivity {
                         startActivity(i1);
                         break;
                     default:
-
                 }
             }
         });
