@@ -26,6 +26,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -44,11 +48,26 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton saveButton, shareButton;
     private Bitmap bitmap;
 
+    private AdView mAdView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
+        mAdView = (AdView) findViewById(R.id.adView);
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId(getString(R.string.admob_app_banner));
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                // Check the LogCat to get your test device ID
+                .addTestDevice("C04B1BFFB0774708339BC273F8A43708")
+                .build();
+
+
+
 
         inputData = (EditText) findViewById(R.id.inputData);
         processButton = (Button) findViewById(R.id.processButton);

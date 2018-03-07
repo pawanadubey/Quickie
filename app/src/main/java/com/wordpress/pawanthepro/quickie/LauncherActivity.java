@@ -32,14 +32,11 @@ public class LauncherActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             startActivity(new Intent(LauncherActivity.this, MainActivity.class));
             overridePendingTransition(R.anim.anim_slide_in_left,
                     R.anim.anim_slide_out_left);
             finish();
-
         }
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
